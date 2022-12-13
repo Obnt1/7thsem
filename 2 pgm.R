@@ -24,18 +24,9 @@ model <- lm(sales ~ youtube, data = train.data)
 summary(model)$coef
 predictions <- model %>% predict(test.data)
 
-library(Metrics)
 rmse(predictions, test.data$sales)
-#R2(predictions, test.data$sales)
+R2(predictions, test.data$sales)
 
-features=c(10,20,30,40,50,60,70,80,90,100)
-newdata <- data.frame(youtube=features)
+newdata <- data.frame(youtube=c(0,1000))
 predictions <- model %>% predict(newdata)
 predictions
-
-plot=data.frame(features,predictions)
-
-ggplot(plot, aes( x = features,y = predictions)) +
-  geom_line()+
-  geom_point() 
-  
