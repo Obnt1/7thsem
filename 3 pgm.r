@@ -1,8 +1,10 @@
-library(tidyverse) ## For data manipulation and visualization
-library(ggplot2) ## For plots
-library(caret) ## For createDataPartition function
+library(tidyverse) 
+library(ggplot2)
+library(caret)
 library(datarium)
+
 data("marketing", package = "datarium")
+
 head(marketing)
 
 dim(marketing)
@@ -33,6 +35,7 @@ test.data <- marketing[-training.samples,]
 
 model <- lm(sales ~ youtube + facebook + newspaper, data = train.data)
 model <- lm(sales ~ ., data = train.data)
+
 summary(model)$coef
 
 predictions <- model %>% predict(test.data)
@@ -42,5 +45,5 @@ RMSE(predictions, test.data$sales)
 R2(predictions, test.data$sales)
 
 newdata <- data.frame(youtube=2000, facebook=1000, newspaper=1000)
- predictions <- model %>% predict(newdata)
+predictions <- model %>% predict(newdata)
 predictions
