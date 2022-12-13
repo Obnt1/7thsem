@@ -1,4 +1,3 @@
-
 loan <- read.csv("credit_data.csv")
 
 str(loan)
