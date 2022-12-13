@@ -56,11 +56,13 @@ ggplot(cars, aes(origin)) +
 
 
 cars$price <- as.integer(cars$price)
+
 boxplot(cars$price, data=cars$price, main="Price BoxPLot",
         xlab="", ylab="Price")
 
 to_Plot <- as.data.frame(table(cars$price))
 colnames(to_Plot) <- c("Price", "Frequency")
+
 ggplot(head(to_Plot[ order(-to_Plot[,2]), ]), aes(x = reorder(Price, Frequency), y
                                                   = Frequency)) +
   geom_bar(stat = "identity") +
@@ -69,12 +71,10 @@ ggplot(head(to_Plot[ order(-to_Plot[,2]), ]), aes(x = reorder(Price, Frequency),
   coord_flip()
 
 cars$horsepower <- as.numeric(as.character(cars$horsepower))
-## Warning: NAs introduced by coercion
-## Warning: NAs introduced by coercion
-# Removing not complete row
+
 cars <- cars[complete.cases(cars),]
-# Removing the ID
 cars <- cars[,-1]
+
 nums <- sapply(cars, is.numeric)
 correlations <- cor(cars[,nums])
 corrplot(correlations, order = "hclust")
